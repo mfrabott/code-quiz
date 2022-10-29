@@ -1,18 +1,24 @@
 
 // DOM Accessed variables
-
+var startButton = document.querySelector(".start-button")
+var timerEl = document.querySelector(".countdown");
 var askedQuestion = document.querySelector(".question");
 var answerOne = document.querySelector(".answer-a");
 var answerTwo = document.querySelector(".answer-b");
 var answerThree = document.querySelector(".answer-c");
 var answerFour = document.querySelector(".answer-d");
+
+// Empty Variables
 currentQuestion = "";
 optionOne = "";
 optionTwo = "";
 optionThree = "";
 optionFour = "";
+correctAnswer = "";
+score = 0;
 
-// QuESTION BANK
+
+// QuESTION BANK. ANSWERS[0] is correct answer.
 
 questionBank = [
     {questionText: "This is question 1", answers: ["Opt1", "Opt2", "Opt3", "Opt4"]},
@@ -20,41 +26,59 @@ questionBank = [
     {questionText: "This is question 3", answers: ["Opt1", "Opt2", "Opt3", "Opt4"]},
     {questionText: "This is question 4", answers: ["Opt1", "Opt2", "Opt3", "Opt4"]},
     {questionText: "This is question 5", answers: ["Opt1", "Opt2", "Opt3", "Opt4"]}
-]
+];
 
 // console.log(questionBank.length);
 // console.log(questionBank[2].questionText);
 // console.log(questionBank[1].answers[3]);
 
-// VAR SCORE
+// TODO: VAR SCORE
 
-// FUNCTION: START BUTTON
 
-// FUNCTION: TIMER ON START
 
-// FUNCTION: ASK QUESTION
 
-    // IF AT LEAST ONE QUESTION, CONTINUE, ELSE, NO MORE QUESTIONS/GAME OVER.
+// TODO: FUNCTION: TIMER
+var countdown = function () {
+    var timeLeft = 20;
+    var timeInterval = setInterval(function () {
+      if (timeLeft >= 1) {
+        timerEl.textContent = timeLeft;
+        timeLeft--;
+      } else {
+        timerEl.textContent = "";
+        clearInterval(timeInterval);
+        // Call the `displayMessage()` function
+        // displayMessage();
+      }
+    }, 1000);
+  };
 
-    // Random number function
+// TODO: FUNCTION: START BUTTON
+var startQuiz = function(){
+    startButton.addEventListener("click", function(event) {
+        event.preventDefault();
+        startButton.setAttribute("style", "display: none");
+        countdown();
+    });
+}
+
+startQuiz();
+// TODO: IF AT LEAST ONE QUESTION, CONTINUE, ELSE, NO MORE QUESTIONS/GAME OVER.
+
+// Random number gererator
 function randomNumber(max) {
     return Math.floor(Math.random() * max);
 }
 
-    // FUNCTION: RANDOMLY SELECT QUESTION FROM BANK
+// FUNCTION: RANDOMLY SELECT QUESTION FROM BANK
 var chooseQuestion = function(){
     questionNumber = randomNumber(questionBank.length);
     currentQuestion = questionBank[randomNumber(questionBank.length)];
     questionBank.splice(questionNumber, 1);
+    correctAnswer = currentQuestion.answers[0];
     return currentQuestion;
 }
 
-
-chooseQuestion();
-// currentQuestion = chosenQuestion;
-
-
-// FUNCTION: REMOVE QUESTION FROM BANK
 
     // FUNCTION: RANDOMIZE ANSWER ORDER
  var shuffleAnswers = function(){
@@ -71,34 +95,65 @@ chooseQuestion();
     optionFour = currentQuestion.answers[answerPullOrder];
  }
 
- shuffleAnswers();
-
- console.log(answerOne);
- console.log(answerTwo);
- console.log(answerThree);
- console.log(answerFour);
-
     // FUNCTION: DISPLAY QUESTION AND ANSWER
+var displayNewQuestion = function(){
+    askedQuestion.textContent = currentQuestion.questionText;
+    answerOne.textContent =  optionOne;
+    answerTwo.textContent = optionTwo;
+    answerThree.textContent = optionThree;
+    answerFour.textContent = optionFour;
+}
 
-askedQuestion.textContent = currentQuestion.questionText;
-answerOne.textContent =  optionOne;
-answerTwo.textContent = optionTwo;
-answerThree.textContent = optionThree;
-answerFour.textContent = optionFour;
-
-// FUNCTION: USER MAKES SELECTION
-
-    // IF CORRECT
+// TODO: FUNCTION: correctChoice
         // MESSAGE(CORRECT!)
         // SCORE ++
 
-    // IF INCORRECT
+// TODO: FUNCTION: incorrectChoice
         // MESSAGE(THE CORRECT ANSWER WAS __)
         // REDUCE TIME
 
-    // ASK QUESTION()
+// FUNCTION: USER MAKES SELECTION
+var userSelection = function(){
+    answerOne.addEventListener("click", function(event) {
+        event.preventDefault();
+        if (optionOne === correctAnswer){
+            correctChoice();
+        } else {
+            incorrectChoice();
+        }
+    });
 
-// FUNCTION: END OF GAME (NO MORE QUESTIONS OR TIMER 0)
+    answerTwo.addEventListener("click", function(event) {
+        event.preventDefault();
+        if (optionOne === correctAnswer){
+            correctChoice();
+        } else {
+            incorrectChoice();
+        }
+    });
+
+    answerThree.addEventListener("click", function(event) {
+        event.preventDefault();
+        if (optionOne === correctAnswer){
+            correctChoice();
+        } else {
+            incorrectChoice();
+        }
+    });
+
+    answerFour.addEventListener("click", function(event) {
+        event.preventDefault();
+        if (optionOne === correctAnswer){
+            correctChoice();
+        } else {
+            incorrectChoice();
+        }
+    });
+}
+
+
+
+// TODO: FUNCTION: END OF GAME (NO MORE QUESTIONS OR TIMER 0)
 
     // MESSAGE(NICE JOB!)
     
@@ -109,14 +164,8 @@ answerFour.textContent = optionFour;
             // SORT HIGH SCORES
             // DISPLAY 1-5
 
+            // startButton.setAttribute("style", "display: visible");
 
-// start button
-
-// timer
-
-// questions
-
-// answers
 
 // WHEN I answer a question
 // THEN I am presented with another question
@@ -127,10 +176,18 @@ answerFour.textContent = optionFour;
 // WHEN all questions are answered or the timer reaches 0
 // THEN the game is over
 
-// stats
+// TODO: stats
 
 
 // Nest everything in while loop, while timer runs…load random question with answers, event.target the right answer
 
+chooseQuestion();
+shuffleAnswers();
+displayNewQuestion();
+userSelection();
 
-// 
+console.log(answerOne.value);
+console.log(answerTwo.value);
+console.log(answerThree.value);
+console.log(optionFour);
+console.log(correctAnswer);
