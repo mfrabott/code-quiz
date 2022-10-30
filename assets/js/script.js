@@ -15,8 +15,8 @@ var userInputBlock = document.querySelector(".user-input");
 var nameInput = document.querySelector("#name");
 var submitButton = document.querySelector(".submit-name");
 var highScoreBlock = document.querySelector(".high-scores");
-
-
+var highScoreName = document.querySelector("#user-name");
+var highScoreScore = document.querySelector("#user-score");
 
 // Global Variables
 var currentQuestion = "";
@@ -28,6 +28,9 @@ var correctAnswer = "";
 var timeLeft = 0;
 var score = 0;
 
+var numHighScores = 10;
+var HIGH_SCORES = 'highScores';
+var highScores = JSON.parse(localStorage.getItem(HIGH_SCORES)) ?? [];
 
 // QuESTION BANK. ANSWERS[0] is correct answer.
 questionBank = [
@@ -37,7 +40,6 @@ questionBank = [
     {questionText: "This is question 4", answers: ["Opt1", "Opt2", "Opt3", "Opt4"]},
     {questionText: "This is question 5", answers: ["Opt1", "Opt2", "Opt3", "Opt4"]}
 ];
-
 
 // FUNCTION: START BUTTON
 var init = function(){
@@ -50,7 +52,6 @@ var init = function(){
         newQuestion();
     });
 };
-
 
 // FUNCTION: TIMER / Started on press of start button
 var countdown = function () {
@@ -68,12 +69,10 @@ var countdown = function () {
     }, 1000);
 };
 
-
 // Random number gererator
 function randomNumber(max) {
     return Math.floor(Math.random() * max);
 };
-
 
 // FUNCTION: RANDOMLY SELECT QUESTION FROM BANK
 var chooseQuestion = function(){
@@ -84,7 +83,6 @@ var chooseQuestion = function(){
         return currentQuestion;
         return correctAnswer;
 };
-
 
 // FUNCTION: RANDOMIZE ANSWER ORDER
 // TODO: MAKE INTO FOR LOOP
@@ -102,7 +100,6 @@ var chooseQuestion = function(){
     optionFour = currentQuestion.answers[answerPullOrder];
 };
 
-
 // FUNCTION: DISPLAY QUESTION AND ANSWER
 var displayNewQuestion = function(){
     askedQuestion.textContent = currentQuestion.questionText;
@@ -111,7 +108,6 @@ var displayNewQuestion = function(){
     answerThreeButton.textContent = optionThree;
     answerFourButton.textContent = optionFour;
 };
-
 
 // FUNCTION: Consolodates steps of pulling new question
 var newQuestion = function(){
@@ -124,14 +120,12 @@ var newQuestion = function(){
     }
 };
 
-
 // FUNCTION: User selects correct answer
 var correctChoice = function() {
     previousAnswerFeedback.textContent = "Correct!"
     previousAnswerFeedback.setAttribute("style", "color: rgb(0, 212, 35)");
     score++;
 };
-
 
 // FUNCTION: User selects wrong answer
 var incorrectChoice = function() {
@@ -140,7 +134,6 @@ var incorrectChoice = function() {
     previousAnswerFeedback.setAttribute("style", "color: rgb(175, 0, 0)");
     return timeLeft;
 };
-
 
 // FUNCTION: USER MAKES SELECTION. Evaluates selection with correct answer and proceeds accordingly
 var userSelection = function(){
@@ -189,7 +182,6 @@ var userSelection = function(){
     });
 };
 
-
 // FUNCTION: END OF GAME (NO MORE QUESTIONS OR TIMER 0)
 var gameOver = function(){
     questionBlock.setAttribute("style", "display: none");
@@ -199,29 +191,48 @@ var gameOver = function(){
     userNameSubmit();
 };
 
-    
 // TODO: ASK NAME TO ADD TO HIGH SCORES
     // SAVE LOCAL NAME AND SCORE
 var userNameSubmit = function(){
     submitButton.addEventListener("click", function(event) {
         event.preventDefault();
-        var user = {
+        
+        var newScore = {
             userName: nameInput.value.trim(),
             userScore: score
         };
-        localStorage.setItem("user", JSON.stringify(user));
         
+          // 1. Add to list
+        highScores.push(newScore);
+
+        // 2. Sort the list
+        highScores.sort((a, b) => b.userScore - a.userScore);
+        
+        // 3. Select new list
+        highScores.splice(numHighScores);
+        
+        // 4. Save to local storage
+        localStorage.setItem(HIGH_SCORES, JSON.stringify(highScores));
+
+
+        console.log(highScores);
+        console.log(HIGH_SCORES);
         userInputBlock.setAttribute("style", "display: none");    
-        highScoreBlock.setAttribute("style", "display: contents");
-    });        
-};
+        renderHighScore(); 
+    });    
+};        
+
 
 // TODO: DISPLAY HIGH SCORES
         // SORT HIGH SCORES
         // DISPLAY 1-5 
-
-
-
+var renderHighScore = function() {
+    var userName = localStorage.getItem("userName");
+    var score = localStorage.getItem("score");
+    highScoreName.textContent = userName;
+    highScoreScore.textContent = score;
+    highScoreBlock.setAttribute("style", "display: contents");
+}
 
 
 init();
