@@ -59,7 +59,8 @@ button{
     font-size: 20px;
 }
 
-.quiz-question {
+.quiz-question,
+.user-input {
     margin: 100px;
     width: 70%;
     display: none;
@@ -68,13 +69,8 @@ button{
     margin: 10px;
     border: var(--border);
     border-radius: var(--border-radius);
-
 }
 
 .high-scores {
-    display: none;
-}
-
-.user-input {
-    display: none;
+    display:none;
 }

@@ -1,17 +1,19 @@
 
 
 // DOM Accessed variables
-var startButton = document.querySelector(".start-button")
+var startButton = document.querySelector(".start-button");
 var timerEl = document.querySelector(".countdown");
 var askedQuestion = document.querySelector(".question");
-var answerOne = document.querySelector(".answer-a");
-var answerTwo = document.querySelector(".answer-b");
-var answerThree = document.querySelector(".answer-c");
-var answerFour = document.querySelector(".answer-d");
-var questionBlock = document.querySelector(".quiz-question")
-var userInputBlock = document.querySelector(".user-input")
-var highScoreBlock = document.querySelector(".high-scores")
-var previousAnswerFeedback = document.querySelector(".previous-feedback")
+var answerOneButton = document.querySelector(".answer-a");
+var answerTwoButton = document.querySelector(".answer-b");
+var answerThreeButton = document.querySelector(".answer-c");
+var answerFourButton = document.querySelector(".answer-d");
+var questionBlock = document.querySelector(".quiz-question");
+var previousAnswerFeedback = document.querySelector(".previous-feedback");
+var userScore = document.querySelector(".user-score")
+var userInputBlock = document.querySelector(".user-input");
+var submitButton = document.querySelector(".submit-name");
+var highScoreBlock = document.querySelector(".high-scores");
 
 
 // Global Variables
@@ -101,10 +103,10 @@ var chooseQuestion = function(){
 // FUNCTION: DISPLAY QUESTION AND ANSWER
 var displayNewQuestion = function(){
     askedQuestion.textContent = currentQuestion.questionText;
-    answerOne.textContent =  optionOne;
-    answerTwo.textContent = optionTwo;
-    answerThree.textContent = optionThree;
-    answerFour.textContent = optionFour;
+    answerOneButton.textContent =  optionOne;
+    answerTwoButton.textContent = optionTwo;
+    answerThreeButton.textContent = optionThree;
+    answerFourButton.textContent = optionFour;
 };
 
 
@@ -139,7 +141,7 @@ var incorrectChoice = function() {
 
 // FUNCTION: USER MAKES SELECTION. Evaluates selection with correct answer and proceeds accordingly
 var userSelection = function(){
-    answerOne.addEventListener("click", function(event) {
+    answerOneButton.addEventListener("click", function(event) {
         event.preventDefault();
         if (optionOne === correctAnswer){
             correctChoice();
@@ -150,7 +152,7 @@ var userSelection = function(){
         }
     });
 
-    answerTwo.addEventListener("click", function(event) {
+    answerTwoButton.addEventListener("click", function(event) {
         event.preventDefault();
         if (optionTwo === correctAnswer){
             correctChoice();
@@ -161,7 +163,7 @@ var userSelection = function(){
         }
     });
 
-    answerThree.addEventListener("click", function(event) {
+    answerThreeButton.addEventListener("click", function(event) {
         event.preventDefault();
         if (optionThree === correctAnswer){
             correctChoice();
@@ -172,7 +174,7 @@ var userSelection = function(){
         }
     });
 
-    answerFour.addEventListener("click", function(event) {
+    answerFourButton.addEventListener("click", function(event) {
         event.preventDefault();
         if (optionFour === correctAnswer){
             correctChoice();
@@ -189,28 +191,29 @@ var userSelection = function(){
 var gameOver = function(){
     questionBlock.setAttribute("style", "display: none");
     timerEl.setAttribute("style", "display: none");
+    userScore.textContent = "Your score is:  " + score;
     userInputBlock.setAttribute("style", "display: contents");
+    userNameSubmit();
 };
 
     
 // TODO: ASK NAME TO ADD TO HIGH SCORES
-       
     // SAVE LOCAL NAME AND SCORE
-        
-        // SORT HIGH SCORES
-        // DISPLAY HIGH SCORES
-        // DISPLAY 1-5
-        
-        // highScoreBlock.setAttribute("style", "display: contents");
-
+var userNameSubmit = function(){
+    submitButton.addEventListener("click", function(event) {
+        event.preventDefault();
+        userInputBlock.setAttribute("style", "display: none");    
+        highScoreBlock.setAttribute("style", "display: contents");
+    });        
+};
 
 // TODO: DISPLAY HIGH SCORES
+        // SORT HIGH SCORES
+        // DISPLAY HIGH SCORES
+        // DISPLAY 1-5 
 
-// WHEN I answer a question incorrectly
-// THEN time is subtracted from the clock
 
 
-// TODO: stats
 
 
 startQuiz();

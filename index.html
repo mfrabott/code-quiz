@@ -40,15 +40,24 @@
         </section>
 
         <!-- TODO: User Input -->
-        <section class="user-input">
+        <section class = "user-input">
             <h2>All Done!</h2>
-            <h3>You scored: </h3>
+            <h3 class="user-score"></h3>
             <h3>Please enter your name to see if you made it onto the high score list</h3>
-
+       
+            <form method="POST">
+                <div>
+                  <label for="name">Name</label>
+                  <input type="text" name="name" id="name" placeholder="Name" />
+                </div>
+                <br>
+                <button class="submit-name">Submit</button>
+            </form>       
         </section>
 
+
         <!-- High score list -->
-        <section class="high-scores">
+        <section class = "high-scores">
             <h2>High Scores</h2>
         </section>
     
