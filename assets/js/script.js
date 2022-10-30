@@ -11,15 +11,17 @@ var answerFour = document.querySelector(".answer-d");
 var questionBlock = document.querySelector(".quiz-question")
 var userInputBlock = document.querySelector(".user-input")
 var highScoreBlock = document.querySelector(".high-scores")
+var previousAnswerFeedback = document.querySelector(".previous-feedback")
 
 
-// Empty Variables
+// Global Variables
 var currentQuestion = "";
 var optionOne = "";
 var optionTwo = "";
 var optionThree = "";
 var optionFour = "";
 var correctAnswer = "";
+var timeLeft = 0;
 var score = 0;
 
 
@@ -35,7 +37,7 @@ questionBank = [
 
 // FUNCTION: TIMER / Started on press of start button
 var countdown = function () {
-    timeLeft = 10;
+    timeLeft = 60;
     var timeInterval = setInterval(function () {
       if (timeLeft >= 1) {
         timerEl.textContent = ("Time remaining: \n" +  timeLeft);
@@ -93,7 +95,7 @@ var chooseQuestion = function(){
     currentQuestion.answers.splice(answerPullOrder, 1);
     answerPullOrder = randomNumber(currentQuestion.answers.length);
     optionFour = currentQuestion.answers[answerPullOrder];
- };
+};
 
 
 // FUNCTION: DISPLAY QUESTION AND ANSWER
@@ -106,6 +108,7 @@ var displayNewQuestion = function(){
 };
 
 
+// FUNCTION: Consolodates steps of pulling new question
 var newQuestion = function(){
     if (questionBank.length > 0) {
         chooseQuestion();
@@ -117,22 +120,24 @@ var newQuestion = function(){
 };
 
 
-// TODO: FUNCTION: correctChoice
+// FUNCTION: User selects correct answer
 var correctChoice = function() {
-    console.log("correct");
-    // TODO: MESSAGE(CORRECT!)
-    // TODO: SCORE ++
+    previousAnswerFeedback.textContent = "Correct!"
+    previousAnswerFeedback.setAttribute("style", "color: rgb(0, 212, 35)");
+    score++;
 };
 
-// TODO: FUNCTION: incorrectChoice
+
+// FUNCTION: User selects wrong answer
 var incorrectChoice = function() {
-    console.log("incorrect")
-    // TODO: MESSAGE(THE CORRECT ANSWER WAS __)
-    // TODO: REDUCE TIME
+    timeLeft = timeLeft-10;
+    previousAnswerFeedback.textContent = ("Incorrect. The answer was: " + correctAnswer)
+    previousAnswerFeedback.setAttribute("style", "color: rgb(175, 0, 0)");
+    return timeLeft;
 };
 
 
-// FUNCTION: USER MAKES SELECTION
+// FUNCTION: USER MAKES SELECTION. Evaluates selection with correct answer and proceeds accordingly
 var userSelection = function(){
     answerOne.addEventListener("click", function(event) {
         event.preventDefault();
@@ -180,12 +185,11 @@ var userSelection = function(){
 };
 
 
-// TODO: FUNCTION: END OF GAME (NO MORE QUESTIONS OR TIMER 0)
+// FUNCTION: END OF GAME (NO MORE QUESTIONS OR TIMER 0)
 var gameOver = function(){
     questionBlock.setAttribute("style", "display: none");
     timerEl.setAttribute("style", "display: none");
     userInputBlock.setAttribute("style", "display: contents");
-
 };
 
     
