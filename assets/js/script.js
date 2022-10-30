@@ -7,6 +7,9 @@ var answerOne = document.querySelector(".answer-a");
 var answerTwo = document.querySelector(".answer-b");
 var answerThree = document.querySelector(".answer-c");
 var answerFour = document.querySelector(".answer-d");
+var questionBlock = document.querySelector(".quiz-question")
+var userInputBlock = document.querySelector(".user-input")
+var highScoreBlock = document.querySelector(".high-scores")
 
 // Empty Variables
 var currentQuestion = "";
@@ -34,14 +37,13 @@ var countdown = function () {
     timeLeft = 10;
     var timeInterval = setInterval(function () {
       if (timeLeft >= 1) {
-        timerEl.textContent = timeLeft;
+        timerEl.textContent = ("Time remaining: \n" + timeLeft);
         timeLeft--;
         return timeLeft;
       } else {
         timerEl.textContent = "";
-        clearInterval(timeInterval);
-        // Call the `displayMessage()` function
-        // displayMessage();
+        gameOver();
+        clearInterval(timeInterval);        
       };
     }, 1000);
   };
@@ -52,6 +54,7 @@ var startQuiz = function(){
         event.preventDefault();
         startButton.setAttribute("style", "display: none");
         countdown();
+        questionBlock.setAttribute("style", "display: inline-block")
         newQuestion();
     });
 };
@@ -101,25 +104,25 @@ var newQuestion = function(){
         shuffleAnswers();
         displayNewQuestion();
     } else {
-        gameOver()
+        gameOver();
     }
 };
 
 // TODO: FUNCTION: correctChoice
 var correctChoice = function() {
-    console.log("correct")
+    console.log("correct");
 };
 
-// MESSAGE(CORRECT!)
-        // SCORE ++
+// TODO: MESSAGE(CORRECT!)
+        // TODO: SCORE ++
 
 // TODO: FUNCTION: incorrectChoice
 var incorrectChoice = function() {
     console.log("incorrect")
 };
 
-    // MESSAGE(THE CORRECT ANSWER WAS __)
-        // REDUCE TIME
+    // TODO: MESSAGE(THE CORRECT ANSWER WAS __)
+        // TODO: REDUCE TIME
 
 // FUNCTION: USER MAKES SELECTION
 var userSelection = function(){
@@ -128,13 +131,9 @@ var userSelection = function(){
         if (optionOne === correctAnswer){
             correctChoice();
             newQuestion();
-            // console.log(currentQuestion);
-            // console.log(correctAnswer);
         } else {
             incorrectChoice();
             newQuestion();
-            // console.log(currentQuestion);
-            // console.log(correctAnswer);
         }
     });
 
@@ -143,13 +142,9 @@ var userSelection = function(){
         if (optionTwo === correctAnswer){
             correctChoice();
             newQuestion();
-            // console.log(currentQuestion);
-            // console.log(correctAnswer);
         } else {
             incorrectChoice();
             newQuestion();
-            // console.log(currentQuestion);
-            // console.log(correctAnswer);
         }
     });
 
@@ -186,33 +181,30 @@ var userSelection = function(){
 
 
 // TODO: FUNCTION: END OF GAME (NO MORE QUESTIONS OR TIMER 0)
-var gameOver = function (){
-    askedQuestion.setAttribute("style", "display:none");
-    answerOne.setAttribute("style", "display:none");
-    answerTwo.setAttribute("style", "display:none");
-    answerThree.setAttribute("style", "display:none");
-    answerFour.setAttribute("style", "display:none");
+var gameOver = function(){
+    questionBlock.setAttribute("style", "display: none");
+    timerEl.setAttribute("style", "display: none");
+    userInputBlock.setAttribute("style", "display: contents");
+
 };
-    // MESSAGE(NICE JOB!)
+
     
-    // ASK NAME TO ADD TO HIGH SCORES
-        // SAVE LOCAL NAME AND SCORE
-    
+    // TODO: ASK NAME TO ADD TO HIGH SCORES
+       
+    // SAVE LOCAL NAME AND SCORE
+        
+        // SORT HIGH SCORES
         // DISPLAY HIGH SCORES
-            // SORT HIGH SCORES
-            // DISPLAY 1-5
+        // DISPLAY 1-5
+        
+        // highScoreBlock.setAttribute("style", "display: contents");
 
-            // startButton.setAttribute("style", "display: visible");
 
-
-// WHEN I answer a question
-// THEN I am presented with another question
-
+            
 // WHEN I answer a question incorrectly
 // THEN time is subtracted from the clock
 
-// WHEN all questions are answered or the timer reaches 0
-// THEN the game is over
+
 
 // TODO: stats
 
@@ -221,18 +213,7 @@ var gameOver = function (){
 // console.log(timeLeft);
 // Nest everything in while loop, while timer runs…load random question with answers, event.target the right answer
 
-// chooseQuestion();
-// shuffleAnswers();
-// displayNewQuestion();
-// userSelection();
-// console.log(timeLeft);
 
-
-
-
-// console.log(answerTwo.value);
-// console.log(answerThree.value);
-// console.log(optionFour);
 
 
 startQuiz();
