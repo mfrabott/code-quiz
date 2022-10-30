@@ -10,10 +10,12 @@ var answerThreeButton = document.querySelector(".answer-c");
 var answerFourButton = document.querySelector(".answer-d");
 var questionBlock = document.querySelector(".quiz-question");
 var previousAnswerFeedback = document.querySelector(".previous-feedback");
-var userScore = document.querySelector(".user-score")
+var userScore = document.querySelector(".user-score");
 var userInputBlock = document.querySelector(".user-input");
+var nameInput = document.querySelector("#name");
 var submitButton = document.querySelector(".submit-name");
 var highScoreBlock = document.querySelector(".high-scores");
+
 
 
 // Global Variables
@@ -37,6 +39,19 @@ questionBank = [
 ];
 
 
+// FUNCTION: START BUTTON
+var init = function(){
+    startButton.addEventListener("click", function(event) {
+        event.preventDefault();
+        startButton.setAttribute("style", "display: none");
+        questionBlock.setAttribute("style", "display: inline-block")
+        userSelection();
+        countdown();
+        newQuestion();
+    });
+};
+
+
 // FUNCTION: TIMER / Started on press of start button
 var countdown = function () {
     timeLeft = 60;
@@ -51,18 +66,6 @@ var countdown = function () {
         clearInterval(timeInterval);        
       };
     }, 1000);
-};
-
-
-// FUNCTION: START BUTTON
-var startQuiz = function(){
-    startButton.addEventListener("click", function(event) {
-        event.preventDefault();
-        startButton.setAttribute("style", "display: none");
-        countdown();
-        questionBlock.setAttribute("style", "display: inline-block")
-        newQuestion();
-    });
 };
 
 
@@ -117,7 +120,7 @@ var newQuestion = function(){
         shuffleAnswers();
         displayNewQuestion();
     } else {
-        gameOver();
+        timeLeft=0;
     }
 };
 
@@ -202,6 +205,12 @@ var gameOver = function(){
 var userNameSubmit = function(){
     submitButton.addEventListener("click", function(event) {
         event.preventDefault();
+        var user = {
+            userName: nameInput.value.trim(),
+            userScore: score
+        };
+        localStorage.setItem("user", JSON.stringify(user));
+        
         userInputBlock.setAttribute("style", "display: none");    
         highScoreBlock.setAttribute("style", "display: contents");
     });        
@@ -209,12 +218,10 @@ var userNameSubmit = function(){
 
 // TODO: DISPLAY HIGH SCORES
         // SORT HIGH SCORES
-        // DISPLAY HIGH SCORES
         // DISPLAY 1-5 
 
 
 
 
 
-startQuiz();
-userSelection();
+init();

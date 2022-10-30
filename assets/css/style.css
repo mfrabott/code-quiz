@@ -71,6 +71,11 @@ button{
     border-radius: var(--border-radius);
 }
 
+.user-input input{
+    color:black;
+    text-align: center;
+}
+
 .high-scores {
     display:none;
 }
