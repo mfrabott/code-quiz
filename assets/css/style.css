@@ -71,6 +71,11 @@ button{
     border-radius: var(--border-radius);
 }
 
+.quiz-question button {
+    width:35%;
+    color: #222;
+}
+
 .user-input input{
     color:black;
     text-align: center;

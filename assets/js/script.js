@@ -19,25 +19,29 @@ var highScoreList = document.querySelector("#high-score-list");
 
 // Global Variables
 var currentQuestion = "";
+
+// Answer and three additional choices
 var optionOne = "";
 var optionTwo = "";
 var optionThree = "";
 var optionFour = "";
+
 var correctAnswer = "";
 var timeLeft = 0;
 var score = 0;
 
+// Length of High Score List
 var numHighScores = 5;
-var HIGH_SCORES = 'highScores';
-var highScores = JSON.parse(localStorage.getItem(HIGH_SCORES)) ?? [];
+// Checks local storage for existing high score list. '??' operator returns blank array if empty.
+var highScores = JSON.parse(localStorage.getItem('highScores')) ?? [];
 
 // QuESTION BANK. ANSWERS[0] is correct answer.
 questionBank = [
-    {questionText: "This is question 1", answers: ["Opt1", "Opt2", "Opt3", "Opt4"]},
-    {questionText: "This is question 2", answers: ["Opt1", "Opt2", "Opt3", "Opt4"]},
-    {questionText: "This is question 3", answers: ["Opt1", "Opt2", "Opt3", "Opt4"]},
-    {questionText: "This is question 4", answers: ["Opt1", "Opt2", "Opt3", "Opt4"]},
-    {questionText: "This is question 5", answers: ["Opt1", "Opt2", "Opt3", "Opt4"]}
+    {questionText: "What is the naming convention for JavaScript variables?", answers: ["camelCase", "UPPERCASE", "lowercase", "lOlCaSe"]},
+    {questionText: "What symbol is used to refer to an id?", answers: ["#", ".", "$", "&"]},
+    {questionText: "What method is used to convert an object to a string?", answers: ["JSON.stringify()", "JSON.parse()", "toString()", "splice()"]},
+    {questionText: "What method is used to add a child element into HTML?", answers: ["appendChild", "addElement", "createElement", "addChild"]},
+    {questionText: "Where is a variable with global scope declared?", answers: ["Outside of functions", "Within functions", "Anywhere", "At the bottom of the code"]}
 ];
 
 // FUNCTION: START BUTTON
@@ -80,7 +84,6 @@ var chooseQuestion = function(){
         questionBank.splice(questionNumber, 1);
         correctAnswer = currentQuestion.answers[0];
         return currentQuestion;
-        return correctAnswer;
 };
 
 // FUNCTION: RANDOMIZE ANSWER ORDER
@@ -190,50 +193,39 @@ var gameOver = function(){
     userNameSubmit();
 };
 
-// TODO: ASK NAME TO ADD TO HIGH SCORES
-    // SAVE LOCAL NAME AND SCORE
+// ASK NAME TO ADD TO HIGH SCORES. SAVE LOCAL NAME AND SCORE
 var userNameSubmit = function(){
     submitButton.addEventListener("click", function(event) {
         event.preventDefault();
         
+        // Saves user's name and score as an object
         var newScore = {
             userName: nameInput.value.trim(),
             userScore: score
         };
-        
-          // 1. Add to list
+          // Adds new score to list
         highScores.push(newScore);
-
-        // 2. Sort the list
+        // Sorts high scores from most to least
         highScores.sort((a, b) => b.userScore - a.userScore);
-        
-        // 3. Select new list
+        // Cuts list to top 5
         highScores.splice(numHighScores);
-        
-        // 4. Save to local storage
-        localStorage.setItem(HIGH_SCORES, JSON.stringify(highScores));
-
-
-        // console.log(highScores);
-        // console.log(HIGH_SCORES);
+        // Saves list to local storage
+        localStorage.setItem('highScores', JSON.stringify(highScores));
         userInputBlock.setAttribute("style", "display: none");    
         renderHighScore(); 
     });    
 };        
 
 
-// TODO: DISPLAY HIGH SCORES
-        // SORT HIGH SCORES
-        // DISPLAY 1-5 
+// DISPLAY HIGH SCORES. Creates and appends list element for each of top 5 scores
 var renderHighScore = function() {
     for (i=0; i<highScores.length; i++) {
         var li = document.createElement("li");
         li.textContent = i+1 + ".   " + highScores[i].userName + " - " + highScores[i].userScore;
         highScoreList.appendChild(li);
     }
-
     highScoreBlock.setAttribute("style", "display: contents");
-}
+};
 
 
 init();
