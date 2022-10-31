@@ -15,8 +15,7 @@ var userInputBlock = document.querySelector(".user-input");
 var nameInput = document.querySelector("#name");
 var submitButton = document.querySelector(".submit-name");
 var highScoreBlock = document.querySelector(".high-scores");
-var highScoreName = document.querySelector("#user-name");
-var highScoreScore = document.querySelector("#user-score");
+var highScoreList = document.querySelector("#high-score-list");
 
 // Global Variables
 var currentQuestion = "";
@@ -28,7 +27,7 @@ var correctAnswer = "";
 var timeLeft = 0;
 var score = 0;
 
-var numHighScores = 10;
+var numHighScores = 5;
 var HIGH_SCORES = 'highScores';
 var highScores = JSON.parse(localStorage.getItem(HIGH_SCORES)) ?? [];
 
@@ -186,7 +185,7 @@ var userSelection = function(){
 var gameOver = function(){
     questionBlock.setAttribute("style", "display: none");
     timerEl.setAttribute("style", "display: none");
-    userScore.textContent = "Your score is:  " + score;
+    userScore.textContent = "Your score is:   " + score;
     userInputBlock.setAttribute("style", "display: contents");
     userNameSubmit();
 };
@@ -215,8 +214,8 @@ var userNameSubmit = function(){
         localStorage.setItem(HIGH_SCORES, JSON.stringify(highScores));
 
 
-        console.log(highScores);
-        console.log(HIGH_SCORES);
+        // console.log(highScores);
+        // console.log(HIGH_SCORES);
         userInputBlock.setAttribute("style", "display: none");    
         renderHighScore(); 
     });    
@@ -227,10 +226,12 @@ var userNameSubmit = function(){
         // SORT HIGH SCORES
         // DISPLAY 1-5 
 var renderHighScore = function() {
-    var userName = localStorage.getItem("userName");
-    var score = localStorage.getItem("score");
-    highScoreName.textContent = userName;
-    highScoreScore.textContent = score;
+    for (i=0; i<highScores.length; i++) {
+        var li = document.createElement("li");
+        li.textContent = i+1 + ".   " + highScores[i].userName + " - " + highScores[i].userScore;
+        highScoreList.appendChild(li);
+    }
+
     highScoreBlock.setAttribute("style", "display: contents");
 }
 
