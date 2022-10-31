@@ -16,7 +16,7 @@ header {
     padding: 70px 0 100px 0;
     margin-bottom: 50px;
     background-color: #222;
-    height:240px;
+    height:200px;
     text-align: center;   
 }
 
@@ -25,26 +25,26 @@ main {
 }
 
 h1 {
-    font-size: 72px;
+    font-size: 56px;
     text-decoration:overline underline;
     padding-bottom: 15px;
 }
  
 h2 {
-    font-size: 36px;
+    font-size: 26px;
     margin: 30px 60px;
     padding-bottom: 30px;
 }
 
 h3 {
-    font-size: 20px;
+    font-size: 16px;
     margin: 30px;
     padding-top: 30px;
 }
 
 button{
     text-align: center;
-    font-size: 24px;
+    font-size: 20px;
     background-color: rgb(124, 151, 209);
     border: var(--border);
     border-radius: var(--border-radius);
@@ -54,18 +54,18 @@ button{
 
 .countdown{
     position: fixed;
-    top: 250px;
+    top: 210px;
     right: 60px;
     font-size: 20px;
 }
 
 .quiz-question,
 .user-input {
-    margin: 100px;
-    width: 70%;
+    /* margin: 100px; */
+    width: 60%;
     display: none;
     text-align: center;
-    padding: 50px 90px;
+    padding: 10px 5px;
     margin: 10px;
     border: var(--border);
     border-radius: var(--border-radius);
@@ -96,6 +96,6 @@ button{
 li{
     list-style: decimal;
     list-style-position: inside;
-    font-size: 26px;
+    font-size: 20px;
     padding: 10px;
 }

@@ -40,7 +40,7 @@ var highScores = JSON.parse(localStorage.getItem('highScores')) ?? [];
     {questionText: "What is the naming convention for JavaScript variables?", answers: ["camelCase", "UPPERCASE", "lowercase", "lOlCaSe"]},
     {questionText: "What symbol is used to refer to an id?", answers: ["#", ".", "$", "&"]},
     {questionText: "What method is used to convert an object to a string?", answers: ["JSON.stringify()", "JSON.parse()", "toString()", "splice()"]},
-    {questionText: "What method is used to add a child element into HTML?", answers: ["appendChild", "addElement", "createElement", "addChild"]},
+    {questionText: "What javaScript method is used to add a child element into HTML?", answers: ["appendChild", "addElement", "createElement", "addChild"]},
     {questionText: "Where is a variable with global scope declared?", answers: ["Outside of functions", "Within functions", "Anywhere", "At the bottom of the code"]}
 ];
 
