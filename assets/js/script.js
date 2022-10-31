@@ -45,7 +45,6 @@ questionBank = [
 // FUNCTION: START BUTTON
 var init = function(){
     startButton.addEventListener("click", function(event) {
-        event.preventDefault();
         startButton.setAttribute("style", "display: none");
         questionBlock.setAttribute("style", "display: inline-block")
         userSelection();
@@ -85,7 +84,6 @@ var chooseQuestion = function(){
 };
 
 // FUNCTION: RANDOMIZE ANSWER ORDER
-// TODO: MAKE INTO FOR LOOP
  var shuffleAnswers = function(){
     // Get random number 0-3
     answerPullOrder = randomNumber(currentQuestion.answers.length);
@@ -144,7 +142,6 @@ var incorrectChoice = function() {
 // FUNCTION: USER MAKES SELECTION. Evaluates selection with correct answer and proceeds accordingly
 var userSelection = function(){
     answerOneButton.addEventListener("click", function(event) {
-        event.preventDefault();
         if (optionOne === correctAnswer){
             correctChoice();
             newQuestion();
@@ -155,7 +152,6 @@ var userSelection = function(){
     });
 
     answerTwoButton.addEventListener("click", function(event) {
-        event.preventDefault();
         if (optionTwo === correctAnswer){
             correctChoice();
             newQuestion();
@@ -166,7 +162,6 @@ var userSelection = function(){
     });
 
     answerThreeButton.addEventListener("click", function(event) {
-        event.preventDefault();
         if (optionThree === correctAnswer){
             correctChoice();
             newQuestion();
@@ -177,7 +172,6 @@ var userSelection = function(){
     });
 
     answerFourButton.addEventListener("click", function(event) {
-        event.preventDefault();
         if (optionFour === correctAnswer){
             correctChoice();
             newQuestion();

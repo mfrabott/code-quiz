@@ -32,10 +32,20 @@ WHEN the game is over
 THEN I can save my initials and my score
 ```
 
+## New Skills Learned and Demonstrated 
 
-## Screenrecord
+Using the DOM to create and append elements and change element attributes;
+Using local storage to store and pull from, including use of JSON.stringify() and JSON.parse();
+Creating buttons with functions;
+Creating a timer using the setInterval function;
 
-![Deployed Code Quiz screenrecord - Desktop](./assets/images/Code%20Quiz!%20(1).gif)
+### Reflections
+
+My biggest challenge was manipulating local storage. Through additional study and research, I was able to develop the functions needed for this challenge, though I this is a point of emphasis for me to review further.
+
+## Screen Recording
+
+![Deployed Code Quiz screen record](./assets/images/Code%20Quiz!%20(1).gif)
 
 ## Deployed App Link
 
