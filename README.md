@@ -34,10 +34,10 @@ THEN I can save my initials and my score
 
 ## New Skills Learned and Demonstrated 
 
-Using the DOM to create and append elements and change element attributes;
-Using local storage to store and pull from, including use of JSON.stringify() and JSON.parse();
-Creating buttons with functions;
-Creating a timer using the setInterval function;
+    Using the DOM to create and append elements and change element attributes
+    Using local storage to store and pull from, including use of JSON.stringify() and JSON.parse()
+    Creating buttons with functions
+    Creating a timer using the setInterval function
 
 ### Reflections
 

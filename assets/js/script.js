@@ -36,7 +36,7 @@ var highScores = JSON.parse(localStorage.getItem('highScores')) ?? [];
 
 // QuESTION BANK. ANSWERS[0] is correct answer.
 
- var fullQuestionBank= [
+var fullQuestionBank= [
     {questionText: "What is the naming convention for JavaScript variables?", answers: ["camelCase", "UPPERCASE", "lowercase", "lOlCaSe"]},
     {questionText: "What symbol is used to refer to an id?", answers: ["#", ".", "$", "&"]},
     {questionText: "What method is used to convert an object to a string?", answers: ["JSON.stringify()", "JSON.parse()", "toString()", "splice()"]},
@@ -106,8 +106,6 @@ var chooseQuestion = function(){
     answerPullOrder = randomNumber(currentQuestion.answers.length);
     optionFour = currentQuestion.answers[answerPullOrder];
 };
-
-
 
 // FUNCTION: DISPLAY QUESTION AND ANSWERS  ON BUTTONS
 var displayNewQuestion = function(){
