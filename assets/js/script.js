@@ -1,5 +1,4 @@
 
-
 // DOM Accessed variables
 var startButton = document.querySelector(".start-button");
 var timerEl = document.querySelector(".countdown");
@@ -19,16 +18,15 @@ var highScoreList = document.querySelector("#high-score-list");
 
 // Global Variables
 var currentQuestion = "";
+var correctAnswer = "";
+var timeLeft = 0;
+var score = 0;
 
 // Answer and three additional choices
 var optionOne = "";
 var optionTwo = "";
 var optionThree = "";
 var optionFour = "";
-
-var correctAnswer = "";
-var timeLeft = 0;
-var score = 0;
 
 // Length of High Score List
 var numHighScores = 5;
@@ -89,9 +87,13 @@ var chooseQuestion = function(){
 // FUNCTION: RANDOMIZE ANSWER ORDER
 // TODO: MAKE INTO FOR LOOP
  var shuffleAnswers = function(){
+    // Get random number 0-3
     answerPullOrder = randomNumber(currentQuestion.answers.length);
+    // Assign answer option based on random index position to optionOne
     optionOne = currentQuestion.answers[answerPullOrder];
+    // Remove answer option from pool
     currentQuestion.answers.splice(answerPullOrder, 1);
+    // New random number 0-2, and continue until all assigned
     answerPullOrder = randomNumber(currentQuestion.answers.length);
     optionTwo = currentQuestion.answers[answerPullOrder];
     currentQuestion.answers.splice(answerPullOrder, 1);
@@ -102,7 +104,9 @@ var chooseQuestion = function(){
     optionFour = currentQuestion.answers[answerPullOrder];
 };
 
-// FUNCTION: DISPLAY QUESTION AND ANSWER
+
+
+// FUNCTION: DISPLAY QUESTION AND ANSWERS  ON BUTTONS
 var displayNewQuestion = function(){
     askedQuestion.textContent = currentQuestion.questionText;
     answerOneButton.textContent =  optionOne;
@@ -111,7 +115,7 @@ var displayNewQuestion = function(){
     answerFourButton.textContent = optionFour;
 };
 
-// FUNCTION: Consolodates steps of pulling new question
+// FUNCTION: Consolodates steps of pulling new question. If no more questions in bank, timer to 0 and game over
 var newQuestion = function(){
     if (questionBank.length > 0) {
         chooseQuestion();
@@ -186,8 +190,10 @@ var userSelection = function(){
 
 // FUNCTION: END OF GAME (NO MORE QUESTIONS OR TIMER 0)
 var gameOver = function(){
+    // Hide questions and timer
     questionBlock.setAttribute("style", "display: none");
     timerEl.setAttribute("style", "display: none");
+    // Display score and user input section
     userScore.textContent = "Your score is:   " + score;
     userInputBlock.setAttribute("style", "display: contents");
     userNameSubmit();
