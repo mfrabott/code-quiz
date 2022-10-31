@@ -15,6 +15,7 @@ var nameInput = document.querySelector("#name");
 var submitButton = document.querySelector(".submit-name");
 var highScoreBlock = document.querySelector(".high-scores");
 var highScoreList = document.querySelector("#high-score-list");
+var resetButton = document.querySelector(".reset-button");
 
 // Global Variables
 var currentQuestion = "";
@@ -34,13 +35,17 @@ var numHighScores = 5;
 var highScores = JSON.parse(localStorage.getItem('highScores')) ?? [];
 
 // QuESTION BANK. ANSWERS[0] is correct answer.
-questionBank = [
+
+ var fullQuestionBank= [
     {questionText: "What is the naming convention for JavaScript variables?", answers: ["camelCase", "UPPERCASE", "lowercase", "lOlCaSe"]},
     {questionText: "What symbol is used to refer to an id?", answers: ["#", ".", "$", "&"]},
     {questionText: "What method is used to convert an object to a string?", answers: ["JSON.stringify()", "JSON.parse()", "toString()", "splice()"]},
     {questionText: "What method is used to add a child element into HTML?", answers: ["appendChild", "addElement", "createElement", "addChild"]},
     {questionText: "Where is a variable with global scope declared?", answers: ["Outside of functions", "Within functions", "Anywhere", "At the bottom of the code"]}
 ];
+
+// Question bank for manipulating during game
+var questionBank = fullQuestionBank;
 
 // FUNCTION: START BUTTON
 var init = function(){
@@ -225,7 +230,11 @@ var renderHighScore = function() {
         highScoreList.appendChild(li);
     }
     highScoreBlock.setAttribute("style", "display: contents");
+    resetButton.addEventListener("click", function(event) {
+        location.reload();
+    });
 };
+
 
 
 init();
