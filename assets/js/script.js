@@ -227,7 +227,7 @@ var userNameSubmit = function(){
 var renderHighScore = function() {
     for (i=0; i<highScores.length; i++) {
         var li = document.createElement("li");
-        li.textContent = i+1 + ".   " + highScores[i].userName + " - " + highScores[i].userScore;
+        li.textContent = highScores[i].userName + " - " + highScores[i].userScore;
         highScoreList.appendChild(li);
     }
     highScoreBlock.setAttribute("style", "display: contents");

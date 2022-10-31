@@ -88,13 +88,14 @@ button{
 .high-scores {
     display:none;
 }
- 
+
 .user-score {
     font-size: 30px;
 }
 
-#high-score-list li{
-    display: list-item;
+li{
+    list-style: decimal;
+    list-style-position: inside;
     font-size: 26px;
     padding: 10px;
 }

@@ -33,9 +33,9 @@ THEN I can save my initials and my score
 ```
 
 
+## Screenrecord
 
-## Screenshot
-
+![Deployed Code Quiz screenrecord - Desktop](./assets/images/Code%20Quiz!%20(1).gif)
 
 ## Deployed App Link
 
