@@ -142,46 +142,29 @@ var incorrectChoice = function() {
     return timeLeft;
 };
 
+var evaluateSelection = function(option) {
+    if (option === correctAnswer){
+        correctChoice();
+        newQuestion();
+    } else {
+        incorrectChoice();
+        newQuestion();
+    }
+}; 
+
 // FUNCTION: USER MAKES SELECTION. Evaluates selection with correct answer and proceeds accordingly
 var userSelection = function(){
     answerOneButton.addEventListener("click", function(event) {
-        if (optionOne === correctAnswer){
-            correctChoice();
-            newQuestion();
-        } else {
-            incorrectChoice();
-            newQuestion();
-        }
+        evaluateSelection(optionOne);
     });
-
     answerTwoButton.addEventListener("click", function(event) {
-        if (optionTwo === correctAnswer){
-            correctChoice();
-            newQuestion();
-        } else {
-            incorrectChoice();
-            newQuestion();
-        }
+        evaluateSelection(optionTwo);
     });
-
     answerThreeButton.addEventListener("click", function(event) {
-        if (optionThree === correctAnswer){
-            correctChoice();
-            newQuestion();
-        } else {
-            incorrectChoice();
-            newQuestion();
-        }
+        evaluateSelection(optionThree);
     });
-
     answerFourButton.addEventListener("click", function(event) {
-        if (optionFour === correctAnswer){
-            correctChoice();
-            newQuestion();
-        } else {
-            incorrectChoice()
-            newQuestion();
-        }
+        evaluateSelection(optionFour);
     });
 };
 
